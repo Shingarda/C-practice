@@ -21,15 +21,15 @@ void thread_function(intleft, intright)
 	longlong cur_mul = 1;
 	for (int i = left; i <right; ++i)
 	{
-		if ((cur_mul * a[i]) % modul != 0) {
-			cur_mul = (a[i] * cur_mul) % modul;
+		if ((cur_mul * a[i] % modul) != 0) {
+			cur_mul = a[i] * cur_mul % modul;
 		}
 		cur_mul *= a[i];
 	}
 	lock_guard<mutex> _sum_lock(sum_lock);
 	cout <<"Thread #"<< this_thread::get_id() <<" is completed"<< endl;
-	if ((array_mul * cur_mul) % modul != 0) {
-		array_mul = (cur_mul * array_mul) % modul;
+	if ((array_mul * cur_mul % modul) != 0) {
+		array_mul = cur_mul * array_mul % modul;
 	}
 	array_mul *= cur_mul;
 }
